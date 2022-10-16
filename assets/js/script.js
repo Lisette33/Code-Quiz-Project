@@ -74,37 +74,44 @@ function generatequiz(questions, quizBox, answersbox, answerButton){
     alert("Hello")
 }
 
-
+var index =0
+function nextQuestion () {
+    //Check if answer is correct or not
+    index ++
+    //Check if game is over or not
+    if(index <questions.length){
+        revealQuestions(questions, quizBox)
+    }
+    //else {Game over}
+}
 
 //Show questions
 function revealQuestions(questions, quizBox){
     var output = [];
     var answers;
 
-    for(var i=0; i<questions.length; i++){
+    // for(var i=0; i<questions.length; i++){
         
         answers = [];
 
-        for(letter in questions[i].answers){
+        for(letter in questions[index].answers){
             console.log(letter)
 
             answers.push(
             '<label>'
-                + '<input type="radio" name="question'+i+'"value="'+letter+'">'
+                + '<input type="radio" name="question'+index+'"value="'+letter+'">'
                 + letter + ': '
-                +questions[i].answers[letter]
+                +questions[index].answers[letter]
             +'</label>' 
             );
         }
 
-        output.push(
-            '<div class="question">' + questions[i].question + '</div>'
+        quizBox.innerHTML = (
+            '<div class="question">' + questions[index].question + '</div>'
             + '<div class="answers">' + answers.join('') + '</div>'
-            + '<button class="nextButton">next</button>'
+            + '<button onclick="nextQuestion()" class="nextButton">next</button>'
         );
-    }
-
-    quizBox.innerHTML = output.join('');
+    // }
 }
 
 
