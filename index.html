@@ -15,18 +15,38 @@
   <body>
         <!-- This is the header opening tag -->
         <header class="header">
-          <h1>Coding Quiz Challenge</h1>
-          <p>
+          <h1>View High Scores</h1>
+          
+        <!-- Navbar -->
+        <nav>
+          <ul>
+              <ol>Time</ol>
+          </ul>
+        </nav>
+      </header>
+      <!-- This is the header closing tag -->
+
+    <!-- This is the figure opening tag --> 
+    <figure class="top">
+      <!--Line break-->  
+          <h2>Coding Quiz Challenge</h2>
+          <p id="instructions">
             Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
           </p>
-        </header>
-        <!-- This is the header closing tag -->
-  
+      </figure>
+      <!-- This is the figure closing tag -->
+
         <!-- This is the main opening tag -->
       <main>
         <div id="code-quiz"></div>
-        <button id="sub-answers">Start</button>
+        <button id="sub-answers">Start Quiz</button>
         <div id="answers"></div>
+        <div id = "scores" style="display: none">
+          <h1>High Scores</h1>
+          <ul id = "highScores">
+          </ul>
+        </div>
+
       </main>
       <!-- This is the main closing tag -->
 

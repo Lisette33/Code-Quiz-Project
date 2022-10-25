@@ -27,10 +27,52 @@ body {
 This is for the header.
 */
 header {
-  text-align: center;
   padding: 20px;
   padding-top: 0px;
   color: hsl(206, 17%, 28%);
+}
+
+/*
+This is for the header h1.
+*/
+.header h1 {
+  text-align: left;
+  display: inline-block;
+  font-size: 14px;
+  color: rgb(213, 180, 241);
+}
+
+/*
+This is for the header nav.
+*/
+.header nav {
+  padding-top: 1px;
+  margin-left: 1150px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+/*
+This is for the h2.
+*/
+h2 {
+  font-size: 35px;
+  color: rgb(0, 55, 255);
+}
+
+/*
+This is for the h2 and p.
+*/
+h2,
+p {
+  text-align: center;
+}
+
+/*
+This is for the main.
+*/
+main {
+  text-align: center;
 }
 
 /*
@@ -64,6 +106,11 @@ This is for the button.
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
+}
+
+button {
+  color: white;
+  background-color: rgb(112, 1, 112);
 }
 
 /*

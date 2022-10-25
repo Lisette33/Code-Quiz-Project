@@ -1,11 +1,15 @@
 var quizBox = document.getElementById('code-quiz');
 var answersbox = document.getElementById('sub-answers');
 var answerButton = document.getElementById('answers');
-
+var instructions = document.getElementById('instructions');
+var highScores = []
+var scores = document.getElementById('scores');
+var highScoresList = document.getElementById('highScores');
 
 //Prompt to start quiz
 answersbox.addEventListener("click",function(){
-    generatequiz(questions, quizBox, answersbox, answerButton);
+   instructions.style.display="none"
+   answersbox.style.display="none"
     revealQuestions(questions, quizBox);
     // revealAnswers(questions, quizBox, answersbox);
 })
@@ -70,19 +74,37 @@ var questions = [
         },
 
 ];
+var anountcorrectAnswers = 0;
+
 function generatequiz(questions, quizBox, answersbox, answerButton){
-    alert("Hello")
+    alert("Click OK to Begin Quiz")
 }
 
 var index =0
+var amountcorrectAnswers = 0
 function nextQuestion () {
     //Check if answer is correct or not
     index ++
+    var useranswer = '';
+    useranswer = (document.querySelector('input[type="radio"]:checked')||{}).value;
+
+    for(var i=0; i<questions.length; i++){
+
+
+        if(useranswer===questions[i].correctanswer){
+            amountcorrectAnswers++;
+    
+        }
+    }
     //Check if game is over or not
     if(index <questions.length){
         revealQuestions(questions, quizBox)
     }
-    //else {Game over}
+    else {
+        gameOver() 
+    }
+
+
 }
 
 //Show questions
@@ -111,45 +133,39 @@ function revealQuestions(questions, quizBox){
             + '<div class="answers">' + answers.join('') + '</div>'
             + '<button onclick="nextQuestion()" class="nextButton">next</button>'
         );
-    // }
+        
 }
 
 
 //If user presses submit, reveal results
-answerButton.onclick = function(){
+function gameOver(){
     revealAnswers(questions, quizBox, answersbox);
 
-    var userInput=window.prompt("All done! Your final score is + Enter initials: ");
+    var userInput=window.prompt("All done! Your final score is "+amountcorrectAnswers+ ' out of ' + questions.length+ "Enter initials: ");
     console.log(userInput);
 
-    var userInput=window.prompt("High scores");
-    console.log(userInput);
-
+var newScore = {
+    initials:userInput,
+    score:amountcorrectAnswers
+}
+highScores = JSON.parse(localStorage.getItem("scores")||"[]")
+highScores.push(newScore)
+localStorage.setItem("scores",JSON.stringify(highScores))
+for(var i=0; i<highScores.length; i++){
+var li=document.createElement("li")
+li.innerText=highScores[i].initials+" "+highScores[i].score
+highScoresList.appendChild(li)
+}
+scores.style.display="block"
 }
 
 
 //Reveal the answers after user pressed submit
 function revealAnswers(questions, quizBox, answersbox){
    
-    var answersbox = quizBox.querySelectorAll('.answers');
+    var answersbox = document.getElementById("answers");
 
-    var useranswer = '';
-    var anountcorrectAnswers = 0;
-
-    for(var i=0; i<questions.length; i++){
-
-        useranswer = (answersbox[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-
-        if(unseranswer===questions[i].correctanswer){
-            amountcorrectAnswers++;
-            answersbox[i].style.color = 'blue';
-        }
-
-        else{
-            answersbox[i].style.color = 'pink';
-        }
-    }
-
-   answersbox.innerHTML = amountcorrectAnswers + ' out of ' + questions.length; i++;
+quizBox.innerHTML=""
+   answersbox.innerHTML = amountcorrectAnswers + ' out of ' + questions.length;
 }
    
